@@ -1,0 +1,11 @@
+# 3337_BookEx
+
+Description: This project is a dynamic book-focused website designed to provide users with a platform to explore, share, and engage with books. Users can browse through a wide range of books in the database, upload their own works for others to discover, and interact with the community by leaving comments and ratings on books. Additional features include the ability to create a personalized favorites list and use advanced search functionality to find specific books or authors quickly. The platform fosters a collaborative and interactive environment for book enthusiasts and aspiring authors alike. 
+
+Members:
+  Annie Lin, 
+  Calvin Chau, 
+  Haik Oganesyan, 
+  Jeffrey Ofalla, 
+  Rocio Hernandez, 
+  Yamilena Hernandez

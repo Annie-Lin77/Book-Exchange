@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load static %}
+{% load dictionary_extras
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+{% block sidenav %}
+   {% for item in item_list %}
+    <li><a href="{{ item.link }}"> {{ item.item }}</a></li>
+   {% endfor %}
+{% endblock sidenav %}
+
+{% block content %}
+<h1>Display Books</h1>
+<table border="2">
+    <tr>
+        <th style="padding: 10px;">Book Name</th>
+        <th style="padding: 10px;">Publisher User</th>
+        <th style="padding: 10px;">Favorite</th>
+        <th style="padding: 10px;">Rating</th>
+        <th style="padding: 10px;">Average Rating</th>
+    </tr>
+
+    {% for book in books %}
+    <tr>
+        <td style="padding: 10px;">
+            <a href="book_detail/{{ book.id }}">{{ book.name }}</a>
+        </td>
+        <td style="padding: 10px;">{{ book.username }}</td>
+        <td style="padding: 10px;">
+            {% if book.is_favorited %}
+                <span>⭐</span>
+            {% else %}
+                <span>-</span>
+            {% endif %}
+        </td>
+        <td style="padding: 10px;">
+            {% if user.is.authenticated %}
+                {% if book.user_rating%}
+                    <span>Your Rating: {{ book.user_rating }}</span>
+                {% else %}
+                    <span>Your Rating: Not rated yet</span>
+                {% endif %}
+                <a href="{% url 'ratebook' book.id %}">Update Rating</a>
+            {% else %}
+                <a href="{% url 'ratebook' book.id %}">Rate this Book</a>
+            {% endif %}
+        </td>
+        <td style="padding: 10px;">
+            {% if book.avg_rating %}
+                    <a href="{% url 'rating_statistics' book.id %}">{{ book.avg_rating|floatformat:1 }}</a>
+                {% else %}
+                    <span>N/A</span>
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock content %}

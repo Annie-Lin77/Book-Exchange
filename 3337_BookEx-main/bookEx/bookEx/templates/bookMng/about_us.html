@@ -1,0 +1,299 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block sidenav %}
+   {% for item in item_list %}
+       <li><a href="{{ item.link }}"> {{ item.item }}</a></li>
+   {% endfor %}
+{% endblock sidenav %}
+
+
+{% block content %}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    
+    <style>
+       .grid-container-1{
+           display: flex;
+           flex-direction: row;
+           gap: 17px;
+       }
+       
+       .vh-50 {
+           display: grid;
+           justify-content: center; 
+           align-items: center;
+       }
+       
+       .card-body{
+           box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 2px 8px 0 rgba(0, 0, 0, 0.19);
+       }
+       
+       .grid-item-box {
+           display: flex;
+           flex-direction: column; /* Stack items vertically */
+           align-items: center; /* Center items horizontally */
+           justify-content: center; /* Center items vertically */
+           text-align: center;
+           border: 1px solid #ccc;
+           padding: 10px; /* padding inside each grid-item */
+           border-radius: 9px; /* rounded corners */
+           background-color: #f6f6f6;
+           box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 1px 4px 0 rgba(0, 0, 0, 0.19);
+           margin-bottom: 20px;
+       }
+       
+       .grid-container-2 {
+           display: flex;
+           flex-direction: column; /* Stack items vertically */
+           gap: 10px; /* between grid-items */
+       }
+       
+       .grid-item {
+           display: flex; /* Aligns content horizontally inside each item */
+           align-items: center;
+           padding: 10px; /* padding inside each grid-item */
+           border-radius: 5px; /* rounded corners */
+       }
+       
+       .avatarImg {
+           max-width: 12%;
+           max-height: 10%;
+           margin-right: 10px; /* Space between image and text */
+           border-radius: 50%;
+       }
+       
+       .text {
+           padding-right: 25px;
+           padding-left: 25px;
+       }
+    
+       h1, h2 {
+           text-align: center;
+           margin: 40px auto;
+       }
+    
+       #introPassage {
+           text-align: center;
+           color: #284350;
+           font-weight: 550;
+           font-size: 20px;
+           margin: 80px auto;
+           padding-left: 65px;
+           padding-right: 65px;
+       }
+    
+       hr {
+           width:13%;
+           margin: 37px auto;
+       }
+       
+       #rightSideIcon{
+           text-align: right;
+       }
+    </style>
+
+    
+    <div>
+       <h1>About Us!</h1>
+       <hr>
+       <p id="introPassage">We’re your digital bookshelf, your cozy reading nook, and your one-stop shop for all things 
+           books! Whether you're here to share your latest literary masterpiece, dive into reviews, or find your next
+           favorite story, we’ve got you covered.</p>
+    </div>
+
+    <div class="grid-container-1">
+       <div class="grid-item-box">
+           <img src="{% static 'rate.png' %}" width="65" height="65">
+           <h5>Rate & Rave</h5>
+           <p>Love it? or hate it? Rate and review books to help fellow readers find their next adventure.</p>
+       </div>
+       <div class="grid-item-box">
+           <img src="{% static 'comment.png' %}" width="55" height="55">
+           <h5>Join the Conversation</h5>
+           <p>Leave comments, share thoughts, and make your voice part of the story.</p>
+       </div>
+       <div class="grid-item-box">
+           <img src="{% static 'search.png' %}" width="55" height="55">
+           <h5>Search for Treasure</h5>
+           <p>Looking for a specific title? Our search is faster than a page turn!</p>
+       </div>
+       <div class="grid-item-box">
+           <img src="{% static 'book.jpg' %}" width="55" height="55">
+           <h5>Share Your Stories</h5>
+           <p>Got a book of your own? Post it and let readers discover your genius.</p>
+       </div>
+       <div class="grid-item-box">
+           <img src="{% static 'heart.png' %}" width="53" height="53">
+           <h5>Save Your Storybook Treasures</h5>
+           <p>Found a book that stole your heart? Hit that favorite button and keep it close!</p>
+       </div>
+    </div>
+    
+    <!-- Quote carousel inspired by mdbootstrap.com/docs/standard/extended/quotes-->
+    <div class="vh-50">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col col-xl-10">
+                    <div class="card">
+                        <div class="card-body py-5">
+                            <!-- Carousel -->
+                            <div id="carouselExampleDark" class="carousel carousel-dark slide position-relative" data-bs-ride="carousel">
+                                <!-- Carousel Inner -->
+                                <div class="carousel-inner">
+                                    <!-- Slide 1 -->
+                                    <div class="carousel-item active" data-bs-interval="7000">
+                                        <div class="row d-flex justify-content-center">
+                                            <div class="col-md-8 col-lg-9 col-xl-8">
+                                                <div class="d-flex">
+                                                    <div class="flex-grow-1 ms-4">
+                                                        <figure>
+                                                            <blockquote class="blockquote mb-4">
+                                                                <p>
+                                                                    <i class="fas fa-quote-left fa-lg text-warning me-2"></i>
+                                                                    A brilliant concept that brings readers together and introduces you to hidden gems 
+                                                                    and diverse voices from around the world.
+                                                                </p>
+                                                            </blockquote>
+                                                            <figcaption class="blockquote-footer">
+                                                                Iris West <cite title="Source Title">Picture News</cite>
+                                                            </figcaption>
+                                                        </figure>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Slide 2 -->
+                                    <div class="carousel-item" data-bs-interval="7000">
+                                        <div class="row d-flex justify-content-center">
+                                            <div class="col-md-8 col-lg-9 col-xl-8">
+                                                <div class="d-flex">
+                                                    <div class="flex-grow-1 ms-4">
+                                                        <figure>
+                                                            <blockquote class="blockquote mb-4">
+                                                                <p>
+                                                                    <i class="fas fa-quote-left fa-lg text-warning me-2"></i>
+                                                                    With its rating and review system, the platform 
+                                                                    creates a book club-like experience, helping users 
+                                                                    easily find their next great read.
+                                                                </p>
+                                                            </blockquote>
+                                                                <figcaption class="blockquote-footer">
+                                                                    Peter Parker <cite title="Source Title">The Daily Bugle</cite>
+                                                                </figcaption>
+                                                        </figure>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Slide 3 -->
+                                    <div class="carousel-item" data-bs-interval="7000">
+                                        <div class="row d-flex justify-content-center">
+                                            <div class="col-md-8 col-lg-9 col-xl-8">
+                                                <div class="d-flex">
+                                                    <div class="flex-grow-1 ms-4">
+                                                        <figure>
+                                                            <blockquote class="blockquote mb-4">
+                                                                <p>
+                                                                    <i class="fas fa-quote-left fa-lg text-warning me-2"></i>
+                                                                    More than a book exchange, this platform builds a 
+                                                                    thriving community where readers can share 
+                                                                    discoveries and literary discussions.
+                                                                </p>
+                                                            </blockquote>
+                                                                <figcaption class="blockquote-footer">
+                                                                    Clark Kent in <cite title="Source Title">The Daily Planet</cite>
+                                                                </figcaption>
+                                                        </figure>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Controls -->
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div>
+       <h2>Meet Our Team!</h2>
+       <hr>
+    </div>
+    
+    <div class="grid-container-2">
+        <div class="grid-item">
+            <img src="{% static 'pfp4.png' %}" alt="Avatar" class="avatarImg">
+            <div class="text">
+                <h3>Annie Lin</h3>
+                <p>Hi, I’m Annie! I’m responsible for styling the website, ensuring it looks polished and inviting. 
+                    I enjoy combining aesthetics with usability to create beautiful designs.</p>
+            </div>
+        </div>
+        <div class="grid-item">
+            <div class="text" id="rightSideIcon">
+                <h3>Calvin Chau</h3>
+                <p >Hi, I’m Calvin! I designed the favorites list feature, making it easy for users to save books they 
+                    love. I focus on user-friendly design and functionality. I’m all about making things simple and 
+                    fun for everyone to use.</p>
+            </div>
+            <img src="{% static 'pfp1.png' %}" alt="Avatar" class="avatarImg">
+        </div>
+        <div class="grid-item">
+            <img src="{% static 'pfp6.png' %}" alt="Avatar" class="avatarImg">
+            <div class="text">
+                <h3>Yamilena Hernandez</h3>
+                <p>Hi, I'm Yamilena! I'm in charge of crafting the About Us page to share more about our amazing team and 
+                    what makes our book exchange website special. I love the creating beautiful visuals along with 
+                    storytelling and showcasing our collaborative journey.</p>
+            </div>
+        </div>
+        <div class="grid-item">
+            <div class="text" id="rightSideIcon">
+                <h3>Rocio Hernandez</h3>
+                <p>Hi, I'm Rocio! I developed the book rating feature, allowing users to share their opinions on the 
+                    books they’ve read. I enjoy creating interactive features that make our website more engaging.</p>
+            </div>
+            <img src="{% static 'pfp3.png' %}" alt="Avatar" class="avatarImg">
+        </div>
+        <div class="grid-item">
+            <img src="{% static 'pfp2.png' %}" alt="Avatar" class="avatarImg">
+            <div class="text">
+                <h3>Haik Oganesyan</h3>
+                <p>LHi, I’m Haik! I implemented the commenting feature so users can discuss and share thoughts about 
+                    their favorite books. Collaboration and creativity drive my work.</p>
+            </div>
+        </div>
+        <div class="grid-item">
+            <div class="text" id="rightSideIcon">
+                <h3>Jeffrey Ofalla</h3>
+                <p>Hi, I’m Jeffrey! I developed the book search functionality to help users find exactly what they're 
+                    looking for. I love problem-solving and optimizing user experience and making sure everything 
+                    runs smoothly and is a breeze to navigate.</p>
+            </div>
+            <img src="{% static 'pfp5.png' %}" alt="Avatar" class="avatarImg">
+        </div>
+        <div class="grid-item">
+           
+        </div>
+        <div class="grid-item">
+           
+        </div>
+    </div>
+
+
+{% endblock content %}

@@ -1,0 +1,91 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+}
+
+.menu {
+    width: 20%;
+    background-color: #f4f4f4;
+    padding: 15px;
+}
+
+.menu ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.menu ul li {
+    margin-bottom: 10px;
+}
+
+.menu ul li a {
+    text-decoration: none;
+    color: #333;
+}
+
+.main-content {
+    width: 80%;
+    padding: 15px;
+}
+
+.footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+/* Table Styles */
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse; /* Ensures borders between cells are separate */
+    margin: 20px 0;
+    font-size: 16px;
+    text-align: left;
+}
+
+table th, table td {
+    padding: 12px 15px; /* Add padding inside cells */
+    text-align: center; /* Center content horizontally */
+}
+
+/* Row Separation */
+table tr {
+    border-bottom: 1px solid #ddd; /* Add a border between rows */
+}
+
+/* Alternating Row Colors for Better Readability */
+table tr:nth-child(even) {
+    background-color: #f9f9f9; /* Light gray background for even rows */
+}
+
+table tr:hover {
+    background-color: #f1f1f1; /* Change background on hover for rows */
+}
+
+/* Header Row Styling */
+table th {
+    background-color: #333333;
+    color: white; /* White text for the header */
+    font-weight: bold;
+}
+
+/* Responsive Table */
+@media (max-width: 768px) {
+    table {
+        font-size: 14px;
+    }
+
+    table th, table td {
+        padding: 8px; /* Adjust padding for smaller screens */
+    }
+}

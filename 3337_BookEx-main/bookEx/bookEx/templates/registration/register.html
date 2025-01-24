@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block sidenav %}
+   {% for item in item_list %}
+    <li><a href="{{ item.link }}"> {{ item.item }}</a></li>
+   {% endfor %}
+{% endblock sidenav %}
+
+{% block content %}
+<h1>User Registration</h1>
+
+<form action="" method="post" >
+      <table>
+          {{ form.as_table }}
+          <tr>
+              <td>
+                  <input type="submit" value="Submit">
+              </td>
+          </tr>
+      </table>
+      <input type="hidden" name="next" value="{{ next }}" />
+      {% csrf_token %}
+</form>
+
+{% endblock content %}

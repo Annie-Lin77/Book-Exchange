@@ -1,0 +1,1 @@
+    path('book/<int:book_id>/comments/', views.bookcomment, name='book_comment'),

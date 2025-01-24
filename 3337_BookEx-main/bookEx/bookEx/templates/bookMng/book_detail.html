@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block sidenav %}
+   {% for item in item_list %}
+    <li><a href="{{ item.link }}"> {{ item.item }}</a></li>
+   {% endfor %}
+{% endblock sidenav %}
+
+{% block content %}
+<h1> Book Detail</h1>
+<table border="2">
+    <tr>
+        <th style="padding: 10px;">
+            Book Name
+        </th>
+        <th style="padding: 10px;">
+            Book Price
+        </th>
+        <th style="padding: 10px;">
+            Publisher User
+        </th>
+        <th style="padding: 10px;">
+            Book Cover
+        </th>
+        <th style="padding: 10px;">
+            FAVORITE
+        </th>
+        <th style="padding: 10px;">
+            Rating
+        </th>
+        <th style="padding: 10px;">
+            Average Rating
+        </th>
+    </tr>
+    <tr>
+        <td style="padding: 10px;">
+            {{ book.name }}
+        </td>
+        <td style="padding: 10px;">
+            {{ book.price }}
+        </td>
+        <td style="padding: 10px;">
+            {{ book.username }}
+        </td>
+        <td style="padding: 10px;">
+            <img src="{% static book.pic_path %}" height="100"/>
+        </td>
+        <td style="padding: 10px;">
+            {% if favorited %}
+                <a href="book_favorite/{{ book.id }}">Unfavorite</a>
+            {% else %}
+                <a href="book_favorite/{{ book.id }}">Favorite</a>
+            {% endif %}
+        </td>
+        <td style="padding: 10px;">
+            {% if user_rating and book.id == user_rating.book.id %}
+                    <span>Your Rating: {{ user_rating.rating }}</span>
+                {% else %}
+                    <a href="{% url 'ratebook' book.id %}">Rate this Book</a>
+            {% endif %}
+        </td>
+        <td style="padding: 10px;">
+            {% if book.avg_rating %}
+                <a href="{% url 'rating_statistics' book.id %}">{{ book.avg_rating|floatformat:1 }}</a>
+            {% else %}
+                <span>N/A</span>
+            {% endif %}
+        </td>
+    </tr>
+</table>
+
+<h2>Comments</h2>
+
+<!-- Display existing comments -->
+{% if comments %}
+    <ul id="comments-list">
+        {% for comment in comments %}
+            <li><strong>{{ comment.author }}</strong>: {{ comment.content }}</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No comments yet. Be the first to comment!</p>
+{% endif %}
+
+<!-- Comment form -->
+{% if user.is_authenticated %}
+    <h3>Add a Comment</h3>
+    <form id="commentForm" method="POST">
+        {% csrf_token %}
+
+        <div style="margin-bottom: 10px;">
+            <label for="author" style="display: block; font-weight: bold;">Your Name</label>
+            <input type="text" name="author" id="author" placeholder="Your Name" required
+                   style="width: 100%; padding: 10px; margin: 5px 0; border: 1px solid #ccc; border-radius: 4px;">
+        </div>
+
+        <div style="margin-bottom: 10px;">
+            <label for="content" style="display: block; font-weight: bold;">Your Comment</label>
+            <textarea name="content" id="content" rows="4" placeholder="Your Comment" required
+                      style="width: 100%; padding: 10px; margin: 5px 0; border: 1px solid #ccc; border-radius: 4px;"></textarea>
+        </div>
+
+        <button type="submit"
+                style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; cursor: pointer; border-radius: 4px;">
+            Submit Comment
+        </button>
+    </form>
+{% else %}
+    <p>You must be logged in to add a comment. <a href="{% url 'login' %}">Login</a></p>
+{% endif %}
+{% endblock content %}
+
+<!-- Add the following JavaScript to handle the form submission via AJAX -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    // Handle the comment form submission
+    $("#commentForm").on("submit", function(event) {
+        event.preventDefault();  // Prevent the form from submitting normally
+
+        // Get the values from the form fields
+        const author = $("#author").val();
+        const content = $("#content").val();
+
+        // Prepare data to send to the server
+        const data = {
+            author: author,
+            content: content,
+            csrfmiddlewaretoken: $("input[name='csrfmiddlewaretoken']").val()
+        };
+
+        // Send the data using AJAX
+        $.ajax({
+            url: "{% url 'book_comment' book.id %}",  // The URL where the comment will be posted
+            type: "POST",
+            data: data,
+            success: function(response) {
+                // On success, add the new comment to the comment list
+                if (response.status === "success") {
+                    // Clear the form
+                    $("#author").val("");
+                    $("#content").val("");
+
+                    // Append the new comment to the list
+                    $("#comments-list").append(
+                        `<li><strong>${response.comment.author}</strong>: ${response.comment.content}</li>`
+                    );
+                } else {
+                    alert("Failed to add the comment. Please try again.");
+                }
+            },
+            error: function() {
+                alert("There was an error submitting your comment. Please try again.");
+            }
+        });
+    });
+</script>
